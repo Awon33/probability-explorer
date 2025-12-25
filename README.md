@@ -1,8 +1,8 @@
-# 🎲 Probability Explorer
+# Probability Explorer
 
 A gamified React application designed to teach secondary school students the fundamentals of probability through interactive visual experiments.
 
-## 🌟 Features
+## Features
 
 * **Zero-Login Access:** Students can start learning immediately.
 * **Visual Experiments:**
@@ -13,7 +13,7 @@ A gamified React application designed to teach secondary school students the fun
 * **Progress Tracking:** LocalStorage saves mastery levels (Stars) automatically.
 * **Hint System:** Built-in support for difficult questions.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Framework:** React (Vite)
 * **Routing:** React Router DOM
@@ -21,11 +21,11 @@ A gamified React application designed to teach secondary school students the fun
 * **Styling:** CSS3 (Animations, 3D Transforms, Conic Gradients)
 * **Storage:** Browser LocalStorage (No Backend required)
 
-## 🚀 How to Run Locally
+## How to Run Locally
 
 1.  **Clone the repository** (or unzip the folder):
     ```bash
-    git clone [https://github.com/yourusername/probability-explorer.git](https://github.com/Awon33/probability-explorer.git)
+    git clone https://github.com/Awon33/probability-explorer.git
     cd probability-explorer
     ```
 
@@ -42,7 +42,7 @@ A gamified React application designed to teach secondary school students the fun
 4.  **Open in Browser:**
     Go to `http://localhost:5173`
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 src/
