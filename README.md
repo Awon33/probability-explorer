@@ -1,4 +1,4 @@
-# Probability Explorer
+# ProbX
 
 A gamified React application designed to teach secondary school students the fundamentals of probability through interactive visual experiments.
 
