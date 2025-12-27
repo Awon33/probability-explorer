@@ -1,0 +1,262 @@
+/* Spinner Container */
+.spinner-container {
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .spinner-container {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .spinner-container {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+.spinner-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* FIXED: Reversed color order to match SpinnerGame.jsx logic */
+.spinner-wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  transition: transform 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.3);
+  border: 8px solid #2d3748;
+  /* REVERSED ORDER to match your game logic */
+  background: conic-gradient(
+    #ef4444 0deg 90deg,    /* Red - 0-90° */
+    #3b82f6 90deg 180deg,  /* Blue - 90-180° */
+    #f59e0b 180deg 270deg, /* Yellow - 180-270° */
+    #10b981 270deg 360deg  /* Green - 270-360° */
+  );
+}
+
+.spinner-wheel.spinning {
+  transition: transform 2s cubic-bezier(0.1, 0.7, 0.1, 1);
+}
+
+/* Thin white divider lines */
+.spinner-divider {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.6);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.divider-vertical {
+  /* Vertical line */
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+}
+
+.divider-horizontal {
+  /* Horizontal line */
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+}
+
+/* Center Circle */
+.spinner-center {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #ffffff, #f7fafc);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  box-shadow: 
+    0 0 20px rgba(0, 0, 0, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.8);
+  border: 4px solid #2d3748;
+}
+
+@media (min-width: 768px) {
+  .spinner-center {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+.spinner-center-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  opacity: 0.6;
+}
+
+/* Spinner Pointer */
+.spinner-pointer {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.pointer-triangle {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 30px solid #2d3748;
+}
+
+.pointer-base {
+  width: 40px;
+  height: 15px;
+  background: #2d3748;
+  border-radius: 4px;
+  margin-top: -5px;
+}
+
+/* Center Dot */
+.spinner-center-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #2d3748;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Glow Effect */
+.spinner-glow-effect {
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.spinner-container:hover .spinner-glow-effect {
+  opacity: 1;
+}
+
+/* Outer Ring */
+.spinner-outer-ring {
+  position: absolute;
+  width: 105%;
+  height: 105%;
+  border: 2px dashed rgba(45, 55, 72, 0.3);
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+  animation: rotateSlow 20s linear infinite;
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Shadow */
+.spinner-shadow {
+  position: absolute;
+  width: 90%;
+  height: 30px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.2), transparent 70%);
+  bottom: -35px;
+  left: 5%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Hover Effects */
+.spinner-container:hover .spinner-wheel:not(.spinning) {
+  transform: scale(1.02);
+}
+
+.spinner-container:active .spinner-wheel:not(.spinning) {
+  transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .spinner-container {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .spinner-wheel {
+    border-width: 6px;
+  }
+  
+  .spinner-center {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .pointer-triangle {
+    border-left: 15px solid transparent;
+    border-right: 15px transparent;
+    border-top: 25px solid #2d3748;
+  }
+  
+  .pointer-base {
+    width: 30px;
+    height: 12px;
+  }
+}
+
+/* Focus state for accessibility */
+.spinner-container:focus {
+  outline: none;
+}
+
+.spinner-container:focus .spinner-wheel:not(.spinning) {
+  outline: 3px solid #10b981;
+  outline-offset: 5px;
+  border-radius: 50%;
+}
+
+/* Active spinning animation */
+.spinner-wheel.spinning {
+  animation: spinGlow 2s ease-in-out;
+}
+
+@keyframes spinGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}

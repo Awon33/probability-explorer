@@ -1,0 +1,115 @@
+/* --- Container & Layout --- */
+.dice-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.scene {
+  width: 120px;
+  height: 120px;
+  perspective: 600px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* --- The Cube --- */
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy landing */
+}
+
+/* --- Faces --- */
+.cube-face {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 20px; /* Rounded corners */
+  border: 1px solid #ddd;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05); /* Inner plastic feel */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* --- The Dots (Pips) --- */
+.pip {
+  background-color: #333;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  align-self: center;
+  justify-self: center;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.8); /* Inset hole look */
+}
+
+/* Pip Coloring per face for extra flair (Optional, removing makes them all black) */
+.face-1 .pip { background-color: #ff4444; } /* Ace is often red */
+
+/* Pip Grid Positioning */
+.pip.center       { grid-column: 2; grid-row: 2; }
+.pip.top-left     { grid-column: 1; grid-row: 1; }
+.pip.top-right    { grid-column: 3; grid-row: 1; }
+.pip.bottom-left  { grid-column: 1; grid-row: 3; }
+.pip.bottom-right { grid-column: 3; grid-row: 3; }
+.pip.middle-left  { grid-column: 1; grid-row: 2; }
+.pip.middle-right { grid-column: 3; grid-row: 2; }
+
+/* --- 3D Transforms (Standard Dice Orientation: Opposites = 7) --- */
+.face-1 { transform: rotateY(0deg) translateZ(60px); }
+.face-6 { transform: rotateY(180deg) translateZ(60px); }
+.face-2 { transform: rotateY(-90deg) translateZ(60px); }
+.face-5 { transform: rotateY(90deg) translateZ(60px); }
+.face-3 { transform: rotateX(-90deg) translateZ(60px); }
+.face-4 { transform: rotateX(90deg) translateZ(60px); }
+
+/* --- Result Rotations --- */
+.show-1 { transform: translateZ(-60px) rotateY(0deg); }
+.show-6 { transform: translateZ(-60px) rotateY(180deg); }
+.show-2 { transform: translateZ(-60px) rotateY(90deg); }
+.show-5 { transform: translateZ(-60px) rotateY(-90deg); }
+.show-3 { transform: translateZ(-60px) rotateX(90deg); }
+.show-4 { transform: translateZ(-60px) rotateX(-90deg); }
+
+/* --- Rolling Animation --- */
+.cube.rolling {
+  animation: tumble 0.6s infinite linear;
+}
+
+@keyframes tumble {
+  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  25% { transform: rotateX(90deg) rotateY(180deg) rotateZ(45deg); }
+  50% { transform: rotateX(180deg) rotateY(270deg) rotateZ(90deg); }
+  75% { transform: rotateX(270deg) rotateY(360deg) rotateZ(135deg); }
+  100% { transform: rotateX(360deg) rotateY(450deg) rotateZ(180deg); }
+}
+
+/* --- Floor Shadow --- */
+.floor-shadow {
+  width: 100px;
+  height: 20px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 70%);
+  margin-top: -10px;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.blur-shadow {
+  transform: scale(0.6);
+  opacity: 0.5;
+  animation: shadow-pulse 0.6s infinite linear;
+}
+
+@keyframes shadow-pulse {
+  0%, 100% { transform: scale(0.6); opacity: 0.5; }
+  50% { transform: scale(0.4); opacity: 0.2; }
+}
